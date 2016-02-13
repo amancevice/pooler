@@ -3,15 +3,16 @@ module Pooler
     has_many :options
     has_many :picks
 
+    before_create :add_index
+
     default_scope -> { order :index }
 
-    before_validation do
-      last = Category.last
-      self.index ||= last.nil? ? 0 : last.index + 1
+    def add_index
+      index ||= (Category.last&.index||-1) + 1
     end
 
     def next
-      Category.where( 'index > ?', self.index ).first
+      Category.where('index > ?', index).first
     end
   end
 end
