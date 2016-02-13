@@ -27,7 +27,7 @@ module Pooler
     end
 
     def correct?
-      correct == true || picks.correct.any
+      correct == true || picks.correct.any?
     end
 
     def incorrect?
