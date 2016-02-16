@@ -8,7 +8,7 @@ module Pooler
     default_scope -> { order :index }
 
     def add_index
-      index ||= (Category.last&.index||-1) + 1
+      self.index ||= (Category.last&.index||-1) + 1
     end
 
     def next
